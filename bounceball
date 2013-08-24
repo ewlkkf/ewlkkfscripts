@@ -1,0 +1,147 @@
+//bounceball
+//made by ewlkkf
+
+var sprint=-1;
+var jump=-1;
+
+function useItem(x,y,z,itemId,blockId)
+{if(itemId==289&&sprint==-1)
+{sprint=1;
+addItemInventory(289,-1);
+setVelX(getPlayerEnt(), 1);}
+
+if(itemId==287&&sprint==-1)
+{sprint=1;
+addItemInventory(287,-1);
+setVelX(getPlayerEnt(), -1);}
+
+if(itemId==340&&jump==-1) {
+jump=1;
+var p=getPlayerEnt();
+setVelY(p,0.7);
+addItemInventory(340,-1);
+}}
+
+function modTick(){
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX(),getPlayerY()-1.8,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.5);}
+
+if(getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX(),getPlayerY()-2.3,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX(),getPlayerY()-2.1,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.5);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===22)
+{setVelY(getPlayerEnt(), 0.7);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===57)
+{setVelY(getPlayerEnt(), 1);
+var p=getPlayerEnt();
+var px=getPlayerX();
+var py=getPlayerY()-3;
+var pz=getPlayerZ();
+	setTile(px, py, pz, 0);} 
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===41)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===155)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+setTile(dx, dy, dz, 12);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===14)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+setTile(dx+1,dy,dz,14);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===15)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+setTile(dx-1,dy,dz,15);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===16)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+setTile(dx,dy+1,dz,16);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===56)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+setTile(dx,dy-1,dz,56);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===20)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+addItemInventory(340, 1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===24)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+addItemInventory(287,1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===35)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+addItemInventory(289,1);}
+
+if(sprint>0)
+{sprint--;}
+
+if(sprint==0)
+{sprint=-1;}
+
+if(jump>0)
+{jump--;}
+
+if(jump==0)
+{jump=-1;}
+
+}
