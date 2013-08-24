@@ -1,0 +1,34 @@
+// super fart
+// made by ewlkkf
+// first made by itsjerryandharry
+
+var fart = 0;
+
+function useItem(x,y,z,itemId,blockId)
+{if(itemId == 340)
+{addItemInventory(310,1);
+addItemInventory(311,1);
+addItemInventory(312,1);
+addItemInventory(313,1);
+addItemInventory(364,64);
+print("let's burn this world!");}
+
+if(itemId == 280&&fart == 0)
+{fart = 1;
+				print("super fart has been started!");
+}
+
+if(itemId == 339&&fart == 1)
+{fart = 0;
+				print("super fart has been ended!");
+}}
+
+function modTick() {
+fx = getPlayerX();
+	fy = getPlayerY() - 1.8;
+	fz = getPlayerZ();
+	// getPlayerEnt();
+if(getTile(fx,fy,fz)&&fart == 1)
+{setTile(fx,fy+1,fz,51);}}
+
+		
