@@ -1,4 +1,114 @@
-Minecraft mode "move plus" is now in the pe!
-You can dash,doublejump,walljump..
+//move plus
+//made by ewlkkf
 
-what is the next update?
+var dash=-1;
+var buglock=1;
+var jump=-1;
+var dodge=-1;
+var wall=-1;
+var walljumpon=0;
+
+function useItem (x,y,z,itemId,blockId){
+if(itemId==280&&dash==-1){
+var player=getPlayerEnt();
+var fx=getPlayerX();
+var fy=getPlayerY();
+var fz=getPlayerZ();
+    dash=1;
+setVelX(player,(x-fx)*0.3);
+setVelZ(player,(z-fz)*0.3);
+  }
+if(itemId==264&&dodge==-1){
+var player=getPlayerEnt();
+var ix=getPlayerX();
+var iy=getPlayerY();
+var iz=getPlayerZ();
+    dodge=1;
+setVelX(player,(ix-x)*0.2);
+setVelZ(player,(iz-z)*0.2);
+  }
+if(itemId==340&&buglock==1&&jump==-1) {
+jump=20;
+var p=getPlayerEnt();
+var px=getPlayerX();
+var py=getPlayerY();
+var pz=getPlayerZ();
+setVelY(p,0.5);
+}
+if(itemId==0)
+{addItemInventory(280,1);
+addItemInventory(341,1);}
+if(itemId==341&&walljumpon==0)
+{walljumpon=1;
+print("wall jump has been started!");}
+else if(itemId==341&&walljumpon==1)
+{walljumpon=0;
+print("wall jump has been ended!");}
+}
+function modTick(){
+  if(dash>0){
+    dash--;
+  }
+  if(dash==0){
+  dash=-1;
+var player=getPlayerEnt();
+var ix=getPlayerX();
+var iy=getPlayerY();
+var iz=getPlayerZ();
+  }
+if(dodge>0){
+    dodge--;
+  }
+  if(dodge==0){
+  dodge=-1;
+var player=getPlayerEnt();
+var fx=getPlayerX();
+var fy=getPlayerY();
+var fz=getPlayerZ();
+  }
+if(jump>0){ 
+jump--;
+}
+if(jump==0) {
+jump=-1;
+var p=getPlayerEnt();
+var px=getPlayerX();
+var py=getPlayerY();
+var pz=getPlayerZ();
+}
+if(getTile(getPlayerX()+1,getPlayerY()-1,getPlayerZ())!==0&&getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())===0&&getTile(getPlayerX(),getPlayerY(),         getPlayerZ())===0&&wall==-1&&walljumpon==1)
+{wall=0;
+setVelX(getPlayerEnt(), -0.4);
+setVelY(getPlayerEnt(), 0.5);
+}
+
+if(getTile(getPlayerX()-1,getPlayerY()-1,getPlayerZ())!==0&&getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())===0&&getTile(getPlayerX(),getPlayerY(),         getPlayerZ())===0&&wall==-1&&walljumpon==1)
+{wall=0;
+setVelX(getPlayerEnt(), 0.4);
+setVelY(getPlayerEnt(), 0.5);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-1,getPlayerZ()+1)!==0&&getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())===0&&getTile(getPlayerX(),getPlayerY(),         getPlayerZ())===0&&wall==-1&&walljumpon==1)
+{wall=0;
+setVelZ(getPlayerEnt(), -0.4);
+setVelY(getPlayerEnt(), 0.5);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-1,getPlayerZ()-1)!==0&&getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())===0&&getTile(getPlayerX(),getPlayerY(),getPlayerZ())===0&&wall==-1&&walljumpon==1)
+{wall=0;
+setVelZ(getPlayerEnt(), 0.4);
+setVelY(getPlayerEnt(), 0.5);
+}
+
+if(wall<5)
+{wall++;
+}
+
+if(wall==5)
+{wall=-1;
+}
+if(walljumpon==0)
+{return;}
+}
+
+
