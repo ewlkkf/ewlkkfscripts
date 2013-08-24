@@ -133,6 +133,32 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 addItemInventory(289,1);}
 
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===80&&move1==0)
+{setVelX(getPlayerEnt(), 1.5);
+move1=1;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move1==1)
+{setVelX(getPlayerEnt(), 0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())!==0)
+{move1=0;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===82&&move2==0)
+{setVelX(getPlayerEnt(), -1.5);
+move2=1;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move2==1)
+{setVelX(getPlayerEnt(), -0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())!==0)
+{move2=0;}
+
 if(sprint>0)
 {sprint--;}
 
