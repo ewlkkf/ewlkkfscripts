@@ -2,7 +2,6 @@
 //made by ewlkkf
 
 var dash=-1;
-var buglock=1;
 var jump=-1;
 var dodge=-1;
 var wall=-1;
