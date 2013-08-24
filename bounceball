@@ -1,9 +1,11 @@
 //bounceball
 //made by ewlkkf
-//warning! This scripts need bug fixing. It makes you die easy when you on the cornor. Sorry :(
+//warning! This scripts need more update!
 
 var sprint=-1;
 var jump=-1;
+var move1=0;
+var move2=0;
 
 function useItem(x,y,z,itemId,blockId)
 {if(itemId==289&&sprint==-1)
@@ -19,7 +21,7 @@ setVelX(getPlayerEnt(), -1);}
 if(itemId==340&&jump==-1) {
 jump=1;
 var p=getPlayerEnt();
-setVelY(p,0.7);
+setVelY(p,1);
 addItemInventory(340,-1);
 }}
 
@@ -28,7 +30,7 @@ function modTick(){
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())!==0)
 {setVelY(getPlayerEnt(), 0.4);}
 
-if(getTile(getPlayerX(),getPlayerY()-1.8,getPlayerZ())!==0)
+if(getTile(getPlayerX(),getPlayerY()-1.9,getPlayerZ())!==0)
 {setVelY(getPlayerEnt(), 0.5);}
 
 if(getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())!==0)
@@ -42,6 +44,32 @@ if(getTile(getPlayerX(),getPlayerY()-2.1,getPlayerZ())!==0)
 
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===22)
 {setVelY(getPlayerEnt(), 0.7);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===80&&move1==0)
+{setVelX(getPlayerEnt(), 1.5);
+move1=1;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move1==1)
+{setVelX(getPlayerEnt(), 0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())!==0)
+{move1=0;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===82&&move2==0)
+{setVelX(getPlayerEnt(), -1.5);
+move2=1;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move2==1)
+{setVelX(getPlayerEnt(), -0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())!==0)
+{move2=0;}
 
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===57)
 {setVelY(getPlayerEnt(), 1);
@@ -106,7 +134,7 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 setTile(dx,dy-1,dz,56);}
 
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===20)
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===24)
 {	
 var d=getPlayerEnt();
 var dx=getPlayerX();
@@ -133,31 +161,8 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 addItemInventory(289,1);}
 
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===80&&move1==0)
-{setVelX(getPlayerEnt(), 1.5);
-move1=1;}
-
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move1==1)
-{setVelX(getPlayerEnt(), 0.5);
-setVelY(getPlayerEnt(), 0.2);
-setVelY(getPlayerEnt(), -0.03);
-}
-
-if(getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())!==0)
-{move1=0;}
-
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===82&&move2==0)
-{setVelX(getPlayerEnt(), -1.5);
-move2=1;}
-
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&move2==1)
-{setVelX(getPlayerEnt(), -0.5);
-setVelY(getPlayerEnt(), 0.2);
-setVelY(getPlayerEnt(), -0.03);
-}
-
-if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())!==0)
-{move2=0;}
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===44)
+{setVelY(getPlayerEnt(), -1);}
 
 if(sprint>0)
 {sprint--;}
