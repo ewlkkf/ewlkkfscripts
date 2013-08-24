@@ -1,5 +1,6 @@
 //bounceball
 //made by ewlkkf
+//warning! This scripts need bug fixing. It makes you die easy when you on the cornor. Sorry :(
 
 var sprint=-1;
 var jump=-1;
