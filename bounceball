@@ -1,11 +1,14 @@
 //bounceball
 //made by ewlkkf
-//warning! This scripts need more update!
+//ver 1.1.3
 
 var sprint=-1;
 var jump=-1;
 var move1=0;
 var move2=0;
+var weakmove1=0;
+var weakmove2=0;
+var walljump=-1;
 
 function useItem(x,y,z,itemId,blockId)
 {if(itemId==289&&sprint==-1)
@@ -21,9 +24,44 @@ setVelX(getPlayerEnt(), -1);}
 if(itemId==340&&jump==-1) {
 jump=1;
 var p=getPlayerEnt();
-setVelY(p,1);
+setVelY(p,0.7);
 addItemInventory(340,-1);
-}}
+}
+if(itemId==265){
+var px=getPlayerX();
+var py=getPlayerY();
+var pz=getPlayerZ();
+setPosition(getPlayerEnt(),px+1,py,pz);
+addItemInventory(265,-1);
+}
+if(itemId==266){
+var px=getPlayerX();
+var py=getPlayerY();
+var pz=getPlayerZ();
+setPosition(getPlayerEnt(),px-1,py,pz);
+addItemInventory(266,-1);
+}
+
+if(blockId==98&&getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())==98)
+{setVelY(getPlayerEnt(),0.5);
+setVelX(getPlayerEnt(),-0.3);
+walljump=5;}
+
+if(blockId==98&&getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())==98)
+{setVelY(getPlayerEnt(),0.5);
+setVelX(getPlayerEnt(),0.3);
+walljump=5;}
+
+if(blockId==98&&getTile(getPlayerX(),getPlayerY(),getPlayerZ()+1)==98)
+{setVelY(getPlayerEnt(),0.5);
+setVelZ(getPlayerEnt(),-0.3);
+walljump=5;}
+
+if(blockId==98&&getTile(getPlayerX()+1,getPlayerY(),getPlayerZ()-1)==98)
+{setVelY(getPlayerEnt(),0.5);
+setVelZ(getPlayerEnt(),0.3);
+walljump=5;}
+}
 
 function modTick(){
 
@@ -31,16 +69,31 @@ if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())!==0)
 {setVelY(getPlayerEnt(), 0.4);}
 
 if(getTile(getPlayerX(),getPlayerY()-1.9,getPlayerZ())!==0)
-{setVelY(getPlayerEnt(), 0.5);}
-
-if(getTile(getPlayerX(),getPlayerY()-2.5,getPlayerZ())!==0)
 {setVelY(getPlayerEnt(), 0.4);}
 
-if(getTile(getPlayerX(),getPlayerY()-2.3,getPlayerZ())!==0)
+if(getTile(getPlayerX()+0.1,getPlayerY()-3,getPlayerZ())!==0)
 {setVelY(getPlayerEnt(), 0.4);}
 
-if(getTile(getPlayerX(),getPlayerY()-2.1,getPlayerZ())!==0)
-{setVelY(getPlayerEnt(), 0.5);}
+if(getTile(getPlayerX()-0.1,getPlayerY()-3,getPlayerZ())!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ()+0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ()-0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX()+0.1,getPlayerY()-3,getPlayerZ()+0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX()-0.1,getPlayerY()-3,getPlayerZ()+0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX()+0.1,getPlayerY()-3,getPlayerZ()-0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
+
+if(getTile(getPlayerX()-0.1,getPlayerY()-3,getPlayerZ()-0.1)!==0)
+{setVelY(getPlayerEnt(), 0.4);}
 
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===22)
 {setVelY(getPlayerEnt(), 0.7);}
@@ -70,6 +123,36 @@ setVelY(getPlayerEnt(), -0.03);
 
 if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())!==0)
 {move2=0;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===47&&weakmove2==0)
+{setVelX(getPlayerEnt(), -1.5);
+weakmove2=1;
+setTile(getPlayerX(),getPlayerY()-3,getPlayerZ(),0);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&weakmove2==1)
+{setVelX(getPlayerEnt(), -0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())!==0)
+{weakmove2=0;}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===48&&weakmove1==0)
+{setVelX(getPlayerEnt(), 1.5);
+weakmove1=1;
+setTile(getPlayerX(),getPlayerY()-3,getPlayerZ(),0);
+}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===0&&weakmove1==1)
+{setVelX(getPlayerEnt(), 0.5);
+setVelY(getPlayerEnt(), 0.2);
+setVelY(getPlayerEnt(), -0.03);
+}
+
+if(getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())!==0)
+{weakmove1=0;}
 
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===57)
 {setVelY(getPlayerEnt(), 1);
@@ -125,6 +208,42 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 setTile(dx,dy+1,dz,16);}
 
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===42)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx+1, dy, dz, 17);
+setTile(dx+2, dy, dz, 17);
+setTile(dx+3, dy, dz, 17);
+setTile(dx+4, dy, dz, 17);
+setTile(dx+5, dy, dz, 17);
+setTile(dx+6, dy, dz, 17);
+setTile(dx+7, dy, dz, 17);
+setTile(dx+8, dy, dz, 17);
+setTile(dx+9, dy, dz, 17);
+setTile(dx+10, dy, dz, 17);
+setTile(dx,dy,dz,49);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===73)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx+1, dy, dz, 44);
+setTile(dx+2, dy, dz, 44);
+setTile(dx+3, dy, dz, 44);
+setTile(dx+4, dy, dz, 44);
+setTile(dx+5, dy, dz, 44);
+setTile(dx+6, dy, dz, 44);
+setTile(dx+7, dy, dz, 44);
+setTile(dx+8, dy, dz, 44);
+setTile(dx+9, dy, dz, 44);
+setTile(dx+10, dy, dz, 44);
+setTile(dx,dy,dz,21);}
+
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===56)
 {	
 var d=getPlayerEnt();
@@ -143,7 +262,7 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 addItemInventory(340, 1);}
 
-if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===24)
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===87)
 {	
 var d=getPlayerEnt();
 var dx=getPlayerX();
@@ -161,8 +280,56 @@ var dz=getPlayerZ();
 setTile(dx, dy, dz, 0);
 addItemInventory(289,1);}
 
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===4)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+addItemInventory(265, 1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===5)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-3;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 0);
+addItemInventory(266, 1);}
+
 if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===44)
 {setVelY(getPlayerEnt(), -1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===10)
+{setVelY(getPlayerEnt(), -1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===11)
+{setVelY(getPlayerEnt(), -1);}
+
+if(getTile(getPlayerX(),getPlayerY()-3,getPlayerZ())===247)
+{	
+var d=getPlayerEnt();
+var dx=getPlayerX();
+var dy=getPlayerY()-4;
+var dz=getPlayerZ();
+setTile(dx, dy, dz, 13);}
+
+if(getTile(getPlayerX()+1,getPlayerY(),getPlayerZ())===98&&walljump==-1)
+{setVelY(getPlayerEnt(), 0.1);
+setVelY(getPlayerEnt(), -0.05);}
+
+if(getTile(getPlayerX()-1,getPlayerY(),getPlayerZ())===98&&walljump==-1)
+{setVelY(getPlayerEnt(), 0.1);
+setVelY(getPlayerEnt(), -0.05);}
+
+if(getTile(getPlayerX(),getPlayerY(),getPlayerZ()-1)===98&&walljump==-1)
+{setVelY(getPlayerEnt(), 0.1);
+setVelY(getPlayerEnt(), -0.05);}
+
+if(getTile(getPlayerX(),getPlayerY(),getPlayerZ()+1)===98&&walljump==-1)
+{setVelY(getPlayerEnt(), 0.1);
+setVelY(getPlayerEnt(), -0.05);}
 
 if(sprint>0)
 {sprint--;}
@@ -176,4 +343,11 @@ if(jump>0)
 if(jump==0)
 {jump=-1;}
 
+if(walljump>0)
+{walljump--;}
+
+if(walljump==0)
+{walljump=-1}
+
 }
+
