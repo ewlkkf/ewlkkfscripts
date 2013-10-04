@@ -1,0 +1,128 @@
+var count=0;
+var count1=0;
+var count2=0;
+var count3=0;
+var RPGarrow=0; //262
+var RPGdiamond=0; //264
+var RPGiron=0; //265
+var RPGgold=0; //266
+var blockCheak=true;
+var px=0;
+var py=0;
+var pz=0;
+var sin=0;
+var tan=0;
+var cos=0;
+var pcos=0;
+
+function newLevel(){
+RPGarrow=0;
+RPGgold=0;
+RPGiron=0;
+RPGdiamond=0;
+clientMessage("[R30] Rocket launcher 30");
+clientMessage("made by MagicWorld(ewlkkfscripts)");
+}
+
+function useItem(x,y,z,i,b){
+if(i==262&&RPGarrow==0)
+{RPGarrow=1;
+addItemInventory(262,-1);
+}
+if(i==266&&RPGgold==0)
+{RPGgold=1;
+addItemInventory(266,-1);}
+
+if(i==265&&RPGiron==0)
+{RPGiron=1;
+addItemInventory(265,-1)
+}
+
+if(i==264&&RPGdiamond==0)
+{RPGdiamond=1;
+addItemInventory(264,-1)
+}
+}
+function modTick(){
+
+if(getCarriedItem()==280&&RPGarrow==1){
+px=getPlayerX();
+py=getPlayerY();
+pz=getPlayerZ();
+sin=-Math.sin(getYaw()/180*Math.PI);
+      cos=Math.cos(getYaw()/180*Math.PI);
+      tan=-Math.sin(getPitch()/180*Math.PI);
+      pcos=Math.cos(getPitch()/180*Math.PI);
+    if(( px+(0.4+count)*sin*pcos, py+(0.4+count)*tan , pz+(0.4+count)*cos*pcos )&&RPGarrow==1){
+        count++;
+        explode(px+(0.4+count)*sin*pcos, py+(0.4+count)*tan , pz+(0.4+count)*cos*pcos, 0.1);
+        Player.setHealth(20);
+    }
+    if(count>80){
+     count=0;
+     RPGarrow=0;
+    }
+  }
+if(getTile( px+(count)*sin*pcos, py+(1+count)*tan , pz+(count)*cos*pcos )!=0)
+{ explode(px+(count)*sin*pcos, py+(1+count)*tan , pz+(count)*cos*pcos, 5);
+RPGarrow=0;
+count=0;}
+
+if(getCarriedItem()==280&&RPGgold==1){
+px=getPlayerX();
+py=getPlayerY();
+pz=getPlayerZ();
+sin=-Math.sin(getYaw()/180*Math.PI);
+      cos=Math.cos(getYaw()/180*Math.PI);
+      tan=-Math.sin(getPitch()/180*Math.PI);
+      pcos=Math.cos(getPitch()/180*Math.PI);
+    if(RPGgold==1){
+        count1++;
+        explode(px+(5+count1)*sin*pcos, py+(5+count1)*tan , pz+(5+count1)*cos*pcos, 4);
+        Player.setHealth(20);
+    }
+    if(count1>10){
+     count1=0;
+     RPGgold=0;
+    }
+  }
+  if(getCarriedItem()==280&&RPGiron==1){
+px=getPlayerX();
+py=getPlayerY();
+pz=getPlayerZ();
+sin=-Math.sin(getYaw()/180*Math.PI);
+      cos=Math.cos(getYaw()/180*Math.PI);
+      tan=-Math.sin(getPitch()/180*Math.PI);
+      pcos=Math.cos(getPitch()/180*Math.PI);
+    if(RPGiron==1){
+        count2++;
+        explode(px+5*sin*pcos,py+5*tan,pz+5*cos*pcos, 2);
+        Player.setHealth(20);
+    }
+    if(count2>60){
+     count2=0;
+     RPGiron=0;
+    }
+  }
+   if(getCarriedItem()==280&&RPGdiamond==1){
+px=getPlayerX();
+py=getPlayerY();
+pz=getPlayerZ();
+sin=-Math.sin(getYaw()/180*Math.PI);
+      cos=Math.cos(getYaw()/180*Math.PI);
+      tan=-Math.sin(getPitch()/180*Math.PI);
+      pcos=Math.cos(getPitch()/180*Math.PI);
+    if(RPGdiamond==1){
+        count3++;
+        explode(px+5*sin*pcos,py+5*tan,pz+5*cos*pcos, 2);
+        explode(px+5*sin*pcos,py+5*tan,pz-5*cos*pcos, 2);
+        explode(px-5*sin*pcos,py+5*tan,pz+5*cos*pcos, 2);
+        explode(px-5*sin*pcos,py+5*tan,pz-5*cos*pcos, 2);
+        Player.setHealth(20);
+    }
+    if(count3>45){
+     count3=0;
+     RPGdiamond=0;
+    }
+  }
+  }
