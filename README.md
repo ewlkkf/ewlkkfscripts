@@ -1,7 +1,7 @@
 ewlkkfscripts
 =============
 
-A new style of scripts! it will be awesome!
+Welcome back. MagicWorld is here!
+Now I'm back to github with many awesome scripts!
+:)
 
-Do you want wanna cool scripts?
-Come and Download it now!
